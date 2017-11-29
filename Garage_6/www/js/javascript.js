@@ -44,7 +44,7 @@ var clientToken = "882ec3178524a02ad8bdb1473fd6aaa143f5a38c";
 // jbf2  exterior
 var deviceOneId = "240035001347343438323536";
 // jbf photon
-var deviceTwoId = "5b004b000f51353338363333";
+// var deviceTwoId = "5b004b000f51353338363333";
 
 // username: justinfriedman22@gmail.com
 // password: password
@@ -56,12 +56,9 @@ document.getElementById("login-btn").addEventListener("click",function() {
   particle.login({username: username, password: pass}).then(logSuccess, logFail)
 });
 var token;
-console.log("3 "+token)
 
 function logSuccess(data) {
-  console.log("Test");
   token = data.body.access_token;
-  console.log("4 "+ token);
   // get the currentStateDoor from varState as soon as it gets connected
   particle.getVariable({ deviceId: deviceId, name: "varState", auth: token }).then(function(data) {
     // console.log('Device variable retrieved successfully:', data);
@@ -109,7 +106,6 @@ function logSuccess(data) {
 
 }
 
-
 function logFail(data){
   alert("Wrong Username/Password, Please Try Again");
   console.log("fail");
@@ -119,56 +115,56 @@ function logFail(data){
 
 // particle.login({username: email, password: password}).then(logSuccess, logFail);
 
-document.getElementById("complete-creation-btn").addEventListener("click",function() {
-  var email = document.getElementById('email-registration').value;
-  var password = document.getElementById('pw-registration').value;
-
-  particle.createCustomer( {productId:productId, clientId:clientId, clientToken:clientToken, customerEmail:email, customerPassword:password} )
-   .then(saveTokenAndClaimDeviceOne)
-   .then(claimDeviceTwo)
-   .then(doneClaimingDevices)
-   .catch(errorClaimingDevices)
-
-   function saveTokenAndClaimDeviceOne(data) {
-    console.log("Success creating customer; Claiming Device One");
-    console.dir(data)
-    customerToken = data.body.access_token;
-    console.log(customerToken)
-    // Return a "promise" object (so .then() can be used)
-
-    return particle.claimDevice({deviceId:deviceOneId, requestTransfer:true, auth:customerToken})
-   }
-
-   //
-
-});
-var customerToken = "LEAVE ALONE";
-
-particle.createCustomer = function ({ productId, clientId, clientToken, customerEmail, customerPassword }) {
- const auth = clientId + ':' + clientToken;
- const uri = `/v1/products/${productId}/customers`;
- return this.post(uri, {productIdOrSlug:productId, client_id:clientId, client_secret:clientToken, email:customerEmail, password:customerPassword
- }, auth, this.context);
-}
-
-function claimDeviceTwo(data) {
- console.log("Success claiming device one; Claiming Device Two");
- console.dir(data)
- // Return a "promise" object (so .then() can be used)
- return particle.claimDevice({deviceId:deviceTwoId, requestTransfer:true, auth:customerToken})
-}
-
-function doneClaimingDevices() {
- console.log("Done Claiming Devices");
- alert("Successfuly created! Go back and login")
-}
-
-function errorClaimingDevices() {
- alert("Wrong credentials. Please try again or have device unclaimed. ");
- console.log("Error Claiming Devices");
-}
-
-
+// document.getElementById("complete-creation-btn").addEventListener("click",function() {
+//   var email = document.getElementById('email-registration').value;
+//   var password = document.getElementById('pw-registration').value;
+//
+//   particle.createCustomer( {productId:productId, clientId:clientId, clientToken:clientToken, customerEmail:email, customerPassword:password} )
+//    .then(saveTokenAndClaimDeviceOne)
+//    .then(claimDeviceTwo)
+//    .then(doneClaimingDevices)
+//    .catch(errorClaimingDevices)
+//
+//    function saveTokenAndClaimDeviceOne(data) {
+//     console.log("Success creating customer; Claiming Device One");
+//     console.dir(data)
+//     customerToken = data.body.access_token;
+//     console.log(customerToken)
+//     // Return a "promise" object (so .then() can be used)
+//
+//     return particle.claimDevice({deviceId:deviceOneId, requestTransfer:true, auth:customerToken})
+//    }
+//
+//    //
+//
+// });
+// var customerToken = "LEAVE ALONE";
+//
+// particle.createCustomer = function ({ productId, clientId, clientToken, customerEmail, customerPassword }) {
+//  const auth = clientId + ':' + clientToken;
+//  const uri = `/v1/products/${productId}/customers`;
+//  return this.post(uri, {productIdOrSlug:productId, client_id:clientId, client_secret:clientToken, email:customerEmail, password:customerPassword
+//  }, auth, this.context);
+// }
+//
+// function claimDeviceTwo(data) {
+//  console.log("Success claiming device one; Claiming Device Two");
+//  console.dir(data)
+//  // Return a "promise" object (so .then() can be used)
+//  return particle.claimDevice({deviceId:deviceTwoId, requestTransfer:true, auth:customerToken})
+// }
+//
+// function doneClaimingDevices() {
+//  console.log("Done Claiming Devices");
+//  alert("Successfuly created! Go back and login")
+// }
+//
+// function errorClaimingDevices() {
+//  alert("Wrong credentials. Please try again or have device unclaimed. ");
+//  console.log("Error Claiming Devices");
+// }
+//
+//
 
 
 var name;
