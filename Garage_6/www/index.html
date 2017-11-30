@@ -14,38 +14,32 @@
 </head>
 
 <body>
-        <!--Nav Bar  -->
-        <ul class="nav-bar">
-                <li>
-                        <a href="#">Garage Door Company</a>
-                </li>
-                <li>
-                        <a href="#" id="nav-doors">Doors</a>
-                </li>
-                <li id="logout-li">
+        <ons-page>
 
-                </li>
-        </ul>
+        <img src="img/dbi_logo.png" alt="DBI logo" />
+        <hr />
         <!--login -->
         <div id="login-page">
 
-                <h2>Login To Your Account </h2>
 
-                <div class="form">
+
+                <div class="form center">
+                        <h2 >Login To Your Account </h2>
                         <div class="pad">
                                 <label>Email Address:</label>
-                                <input type="email" id="email" />
-                        </div>
+
+                                <div><input type="email" class="text-input text-input--underbar center" placeholder="email" id="email"></div>
+
                         <div class="pad">
                                 <label>Password:</label>
-                                <input type="password" id="pw" />
+                                <div>
+                                <input type="password" id="pw" class="text-input text-input--underbar center" placeholder="password"/>
+                                </div>
                         </div>
-                        <!-- <i><button id="forgot-pwd-btn">Forgot Password?</button> -->
-                        </i><br />
-                        <i><button id="create-account-btn">Create an Account</button></i>
+
                         <br />
                         <br />
-                        <button class="no-dec-a" id="login-btn">Login</button>
+                        <button class="button center" id="login-btn">Login</button>
 
                 </div>
         </div>
@@ -221,6 +215,8 @@
         </div>
         <script type="text/javascript" src="js/javascript.js"></script>
         <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+</ons-page>
+
 </body>
 
 

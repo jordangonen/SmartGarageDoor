@@ -631,16 +631,16 @@ function singleDisplay(x) {
 //     displayElement("login-page","request-page");
 // });
 // back page
-document.getElementById("back-btn").addEventListener("click", function() {
-    displayElement("create-page","login-page");
-});
+// document.getElementById("back-btn").addEventListener("click", function() {
+//     displayElement("create-page","login-page");
+// });
 // forgot-password-button
 // document.getElementById("forgot-pwd-btn").addEventListener("click", function() {
 //     displayElement("login-page","request-page");
 // });
-document.getElementById("create-account-btn").addEventListener("click", function() {
-    displayElement("login-page","create-page");
-});
+// document.getElementById("create-account-btn").addEventListener("click", function() {
+//     displayElement("login-page","create-page");
+// });
 // document.getElementById("complete-creation-btn").addEventListener("click", function() {
 //
 //
@@ -706,12 +706,12 @@ document.getElementById("save-btn").addEventListener("click", function() {
         sensorDisplay();
     displayElement("edit-page","main-page");
 });
-document.getElementById('nav-doors').addEventListener('click', function() {
-        if (currentView != 'login-page' && currentView != 'request-page' && currentView != 'create-page') {
-                displayElement(currentView,"main-page");
-        }
-
-});
+// document.getElementById('nav-doors').addEventListener('click', function() {
+//         if (currentView != 'login-page' && currentView != 'request-page' && currentView != 'create-page') {
+//                 displayElement(currentView,"main-page");
+//         }
+//
+// });
 document.getElementById("close-btn").addEventListener("click", function() {
     // stateChange();
 });
