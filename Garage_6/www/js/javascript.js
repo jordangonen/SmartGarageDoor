@@ -63,6 +63,7 @@ function logSuccess(data) {
   particle.getVariable({ deviceId: deviceId, name: "varState", auth: token }).then(function(data) {
     // console.log('Device variable retrieved successfully:', data);
     stateMover(data);
+     displayElement("login-page","main-page");
     document.getElementById("card").style.display = "block";
     document.getElementById("notLoaded").innerHTML = "";
     console.log("received data");
@@ -72,8 +73,8 @@ function logSuccess(data) {
   }, function(err) {
     // console.log('An error occurred while getting attrs:', err);
   });
-  document.getElementById("create-page").style.display="none";
-  displayElement("login-page","main-page");
+  // document.getElementById("create-page").style.display="none";
+
 
   particle.getVariable({ deviceId: deviceId, name: "autoCloseOn", auth: token }).then(function(data) {
     // console.log('Device variable retrieved successfully:', data);
@@ -356,7 +357,7 @@ document.getElementById("turn_off").addEventListener("click", function() {
       document.getElementById("settings_module").style.display ="none";
       document.getElementById("enable_auto").style.display ="block";
       document.getElementById("autoState").innerHTML ="AutoClose is Off";
-      document.getElementById("offButton").style.display ="block";
+      document.getElementById("offButton").style.display ="none";
 
 
 });
@@ -694,9 +695,9 @@ function singleDisplay(x) {
 //
 
 // });
-document.getElementById("request-pwd-btn").addEventListener("click", function() {
-    passWrite();
-});
+// document.getElementById("request-pwd-btn").addEventListener("click", function() {
+//     passWrite();
+// });
 
 
 // document.getElementById("settings-btn").addEventListener("click", function() {
