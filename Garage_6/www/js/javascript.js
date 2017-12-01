@@ -284,7 +284,7 @@ document.getElementById("save_setting").addEventListener("click", function() {
 });
 document.getElementById("turn_off").addEventListener("click", function() {
         secs = 0;
-        secs = secs.toString() + "000";
+        secs = secs.toString();
 
         var autoTimer = particle.callFunction({
                 deviceId: deviceId,

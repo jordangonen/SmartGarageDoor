@@ -372,6 +372,7 @@ int webButton( String command ) {
 int autoCloseWeb( String command) {
   if (command == "0") {
     autoCloseOn = false;
+      Serial.println("auto close timer turned off");
     return 1;
   }
   if (command.toInt() != 0) {
