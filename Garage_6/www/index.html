@@ -15,10 +15,12 @@
 
 <body>
         <ons-page>
+                <!-- logo -->
                 <div class="center">
                         <img src="img/dbi_logo.png" alt="DBI logo" id="logo" />
                 </div>
 
+                <!-- logout button -->
 
                 <div id="log-out" class="center">
                         <button class="button  button--light">Logout</button>
@@ -26,8 +28,6 @@
                 <hr />
                 <!--login -->
                 <div id="login-page">
-
-
 
                         <div class="form center">
                                 <h2>Login To Your Account </h2>
@@ -51,11 +51,6 @@
                         </div>
                 </div>
 
-
-
-
-
-
                 <!--Main Page  -->
                 <div id="main-page">
                         <h1 id="notLoaded"></h1>
@@ -63,34 +58,6 @@
                                 <div class="card-title card_title center">
                                         <h2 id="card-title">Door is Open</h2>
                                 </div>
-                                <!-- <div class="card-status">
-                <table class="card-table">
-                        <tr>
-                                <td class="card-td fa-i">
-                                        <i class="fa fa-thermometer-empty" aria-hidden="true"></i>
-                                </td>
-                                <td class="card-td fa-i">
-                                        <i class="fa fa-tint" aria-hidden="true"></i>
-                                </td>
-                                <td class="card-td fa-i">
-                                        <i class="fa fa-male" aria-hidden="true"></i>
-
-                                </td>
-                        </tr>
-                        <tr>
-                                <td class="card-td">
-                                        <h2 id="temp-display">76f</h2>
-                                </td>
-                                <td class="card-td">
-                                        <h2 id="hum-display">44%</h2>
-                                </td>
-                                <td class="card-td">
-                                        <h2 id="motion-display">no</h2>
-                                </td>
-                        </tr>
-
-                </table>
-        </div> -->
                                 <div class="card__content">
                                         <div class="card-btns" id="open">
                                                 <!-- open, close, pause button  -->
@@ -139,24 +106,7 @@
                                                 <input type="text" value="ID" id="garage-id">
                                         </div>
                                 </div>
-                                <div>
-
-
-                                        <h3> Which Enviromental Sensors Do You Have?</h3>
-                                        <label>
-            <input type="checkbox" id="temp-check">
-            Temperature
-          </label>
-                                        <label>
-                <input type="checkbox" id="hum-check">
-                Humidity
-              </label>
-                                        <label>
-                    <input type="checkbox" id="motion-check">
-                    Motion Sensing
-                  </label>
-
-                                </div>
+                  
                                 <br />
                                 <div>
                                         <label>How long should the door wait to auto close(mins)? (0 turns this off)</label>
