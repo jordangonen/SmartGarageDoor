@@ -53,7 +53,14 @@
 
                 <!--Main Page  -->
                 <div id="main-page">
-                        <h1 id="notLoaded"></h1>
+                        <div class="card" id="notLoaded">
+                                <div class="card__content">
+                                        <h1>Garage Controller Not Online</h1>
+                                        <br />
+                                        <h3 >Please log out -> connect Photon to power -> log in </h3>
+                                </div>
+                        </div>
+
                         <div id="card" class="card center">
                                 <div class="card-title card_title center">
                                         <h2 id="card-title">Door is Open</h2>
@@ -106,7 +113,7 @@
                                                 <input type="text" value="ID" id="garage-id">
                                         </div>
                                 </div>
-                  
+
                                 <br />
                                 <div>
                                         <label>How long should the door wait to auto close(mins)? (0 turns this off)</label>

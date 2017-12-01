@@ -7,7 +7,7 @@ var deviceId = '240035001347343438323536';
 
 var autoTime;
 document.getElementById("card").style.display == "none";
-document.getElementById("notLoaded").innerHTML = "Please connect photon";
+
 console.log("waiting");
 
 var fsmCalled = false;
@@ -36,6 +36,14 @@ document.getElementById("login-btn").addEventListener("click", function() {
 var token;
 // if login is successful
 function logSuccess(data) {
+        document.getElementById("log-out").style.display = "block";
+        // reloads page to login
+        document.getElementById("log-out").addEventListener("click", function() {
+                location.reload();
+        });
+        displayElement("login-page", "main-page");
+
+
         token = data.body.access_token;
         // get the currentStateDoor from varState as soon as it gets connected
         particle.getVariable({
@@ -45,22 +53,19 @@ function logSuccess(data) {
         }).then(function(data) {
                 // console.log('Device variable retrieved successfully:', data);
                 stateMover(data);
-                displayElement("login-page", "main-page");
-                document.getElementById("card").style.display = "block";
-                document.getElementById("log-out").style.display = "block";
-                document.getElementById("notLoaded").innerHTML = "";
+
                 console.log("received data");
                 // stateMover(currentStateDoor);
                 console.log(currentStateDoor);
+                document.getElementById("card").style.display = "block";
+
+                document.getElementById("notLoaded").style.display = "none";
                 // if an error occurs
         }, function(err) {
           //errors
                 // console.log('An error occurred while getting attrs:', err);
         });
-        // reloads page to login
-        document.getElementById("log-out").addEventListener("click", function() {
-                location.reload();
-        });
+
 
         particle.getVariable({
                 deviceId: deviceId,
@@ -92,10 +97,10 @@ function logSuccess(data) {
                 auth: token,
                 name: 'state'
         }).then(function(stream) {
-                console.log("justin hates this");
-                stream.on('state', stateMover)
+                console.log(stream);
+
         }, function(err) {
-                console.log("error setting")
+                console.log("error getting stream state")
         });
 
 }
@@ -231,6 +236,14 @@ document.getElementById("close-btn").addEventListener("click", function() {
                 name: 'webButton',
                 argument: argument,
                 auth: token
+        }).then(function(data) {
+
+                // if an error occurs
+        }, function(err) {
+                document.getElementById("card").style.display = "none";
+
+                document.getElementById("notLoaded").style.display = "block";
+
         });
         console.log("2 " + token);
         moveState.then(
@@ -254,6 +267,14 @@ document.getElementById("enable_auto").addEventListener("click", function() {
                 name: 'autoCloseWeb',
                 argument: secs,
                 auth: token
+        }).then(function(data) {
+
+                // if an error occurs
+        }, function(err) {
+                document.getElementById("card").style.display = "none";
+
+                document.getElementById("notLoaded").style.display = "block";
+
         });
         autoTimer.then(
                 function(data) {
@@ -273,6 +294,14 @@ document.getElementById("save_setting").addEventListener("click", function() {
                 name: 'autoCloseWeb',
                 argument: secs,
                 auth: token
+        }).then(function(data) {
+
+                // if an error occurs
+        }, function(err) {
+                document.getElementById("card").style.display = "none";
+
+                document.getElementById("notLoaded").style.display = "block";
+
         });
         autoTimer.then(
                 function(data) {
@@ -291,6 +320,14 @@ document.getElementById("turn_off").addEventListener("click", function() {
                 name: 'autoCloseWeb',
                 argument: secs,
                 auth: token
+        }).then(function(data) {
+
+                // if an error occurs
+        }, function(err) {
+                document.getElementById("card").style.display = "none";
+
+                document.getElementById("notLoaded").style.display = "block";
+
         });
         autoTimer.then(
                 function(data) {
