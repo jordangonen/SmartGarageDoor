@@ -46,6 +46,7 @@ var deviceOneId = "240035001347343438323536";
 // jbf photon
 // var deviceTwoId = "5b004b000f51353338363333";
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 // username: justinfriedman22@gmail.com
 // password: password
@@ -54,6 +55,12 @@ var deviceOneId = "240035001347343438323536";
 <<<<<<< HEAD
 // pass to login
 =======
+>>>>>>> parent of 650eead... auto close fix
+=======
+
+// username: justinfriedman22@gmail.com
+// password: password
+
 >>>>>>> parent of 650eead... auto close fix
 =======
 
@@ -111,8 +118,11 @@ function logSuccess(data) {
         });
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 =======
+=======
+>>>>>>> parent of 650eead... auto close fix
 =======
 >>>>>>> parent of 650eead... auto close fix
         // document.getElementById("create-page").style.display="none";
@@ -220,6 +230,9 @@ function logFail(data){
 >>>>>>> parent of b0bfb48... ALL WORKING
 }
 
+<<<<<<< HEAD
+=======
+>>>>>>> parent of 650eead... auto close fix
 =======
 >>>>>>> parent of 650eead... auto close fix
 // new registartion
@@ -704,7 +717,10 @@ document.getElementById("save_setting").addEventListener("click", function() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> parent of 650eead... auto close fix
 =======
 >>>>>>> parent of 650eead... auto close fix
 
@@ -715,6 +731,9 @@ document.getElementById("save_setting").addEventListener("click", function() {
 
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> parent of 650eead... auto close fix
+=======
 >>>>>>> parent of 650eead... auto close fix
 =======
 >>>>>>> parent of 650eead... auto close fix
@@ -881,7 +900,10 @@ function displayElement(hide, show) {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 // sets single display
+=======
+>>>>>>> parent of 650eead... auto close fix
 =======
 >>>>>>> parent of 650eead... auto close fix
 =======
