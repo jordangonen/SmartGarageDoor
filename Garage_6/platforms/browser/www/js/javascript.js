@@ -23,6 +23,7 @@ var clientToken = "882ec3178524a02ad8bdb1473fd6aaa143f5a38c";
 
 var deviceOneId = "240035001347343438323536";
 
+<<<<<<< HEAD
 // pass to login
 document.getElementById("login-btn").addEventListener("click", function() {
         var username = document.getElementById('email').value;
@@ -32,10 +33,18 @@ document.getElementById("login-btn").addEventListener("click", function() {
                 username: username,
                 password: pass
         }).then(logSuccess, logFail)
+=======
+document.getElementById("login-btn").addEventListener("click",function() {
+  var username = document.getElementById('email').value;
+  var pass = document.getElementById('pw').value;
+  console.log("clicked");
+  particle.login({username: username, password: pass}).then(logSuccess, logFail)
+>>>>>>> parent of b0bfb48... ALL WORKING
 });
 var token;
 // if login is successful
 function logSuccess(data) {
+<<<<<<< HEAD
         document.getElementById("log-out").style.display = "block";
         // reloads page to login
         document.getElementById("log-out").addEventListener("click", function() {
@@ -108,12 +117,67 @@ function logSuccess(data) {
 function logFail(data) {
         alert("Wrong Username/Password, Please Try Again");
         console.log("fail");
+=======
+  token = data.body.access_token;
+  // get the currentStateDoor from varState as soon as it gets connected
+  particle.getVariable({ deviceId: deviceId, name: "varState", auth: token }).then(function(data) {
+    // console.log('Device variable retrieved successfully:', data);
+    stateMover(data);
+     displayElement("login-page","main-page");
+    document.getElementById("card").style.display = "block";
+    document.getElementById("notLoaded").innerHTML = "";
+    console.log("received data");
+    // stateMover(currentStateDoor);
+    console.log(currentStateDoor);
+  // if an error occurs
+  }, function(err) {
+    // console.log('An error occurred while getting attrs:', err);
+  });
+  // document.getElementById("create-page").style.display="none";
+
+
+  particle.getVariable({ deviceId: deviceId, name: "autoCloseOn", auth: token }).then(function(data) {
+    // console.log('Device variable retrieved successfully:', data);
+    autoTime = data.body.result;
+    if (!autoTime) {
+      document.getElementById("enable_auto").addEventListener("click", function() {
+            //  displayElement(enable_auto,settings_module);
+            document.getElementById("autoState").innerHTML = "Auto-Close is Off";
+            document.getElementById("settings_module").style.display ="block";
+            document.getElementById("enable_auto").style.display ="none";
+      });
+
+    }
+    if (autoTime)  {
+      document.getElementById("settings_module").style.display ="block";
+      document.getElementById("enable_auto").style.display ="none";
+      document.getElementById("autoState").innerHTML = "Auto-Close is On";
+    }
+    console.log(autoTime);
+  }, function(err) {
+    // console.log('An error occurred while getting attrs:', err);
+  });
+
+  particle.getEventStream({ deviceId: deviceOneId, auth: token, name:'state' }).then(function(stream) {
+    console.log("justin hates this");
+  stream.on('state', stateMover)
+}, function(err) {
+  console.log("error setting")
+});
+
+}
+
+function logFail(data){
+  alert("Wrong Username/Password, Please Try Again");
+  console.log("fail");
+>>>>>>> parent of b0bfb48... ALL WORKING
 }
 
 var name;
 var currentStateDoor;
 // statemover function that is called when eventStream is received
 function stateMover(data) {
+<<<<<<< HEAD
         console.log("in");
         // if we've already called the door , just use data.data
         if (fsmCalled == true) {
@@ -217,11 +281,120 @@ function stateMover(data) {
                         document.getElementById('open').style.backgroundColor = 'rgb(70,130,180)';
                         break;
         }
+=======
+  console.log("in");
+  // if we've already called the door , just use data.data
+  if(fsmCalled == true) {
+    currentStateDoor = data.data;
+    console.log("truething");
+    console.log("this is the " + currentStateDoor);
+  }
+  // if we have not already called the door (meaning this is the first time) , use data.body.result and convert it to a string
+  if(fsmCalled == false) {
+    // set state of FSM = true
+    console.log("falsething")
+    fsmCalled = true;
+    currentStateDoor = data.body.result;
+    // convert to a string
+    currentStateDoor = currentStateDoor.toString();
+    console.log(currentStateDoor);
+  }
+
+  // console.log(data.data);
+
+  // green rgb(65, 159, 49)
+  // red rgb(247, 47, 47)
+  // waiting 'rgb(247, 231, 12)'
+
+//finite state machine with our current state of door
+  switch (currentStateDoor) {
+    // down state
+    case "0":
+      console.log("Down");
+      // html updates
+      document.getElementById('card-title').innerHTML = "Door is Down";
+      document.getElementById('close-btn').innerHTML = "Open";
+      document.getElementById('open').style.backgroundColor  = 'rgb(65, 159, 49)' ;
+    break;
+//going down state
+    case "1":
+      console.log("Going Down");
+
+      // html updates
+      document.getElementById('card-title').innerHTML = "Door is Going Down";
+      document.getElementById('close-btn').innerHTML = "Stop";
+      document.getElementById('open').style.backgroundColor  = 'rgb(247, 231, 12)' ;
+      // clearTimeout(timer);
+      // document.getElementById('close-btn').innerHTML = "Close";
+    break;
+// going up state
+    case "2":
+      console.log("Going Up");
+      // html updates
+      document.getElementById('card-title').innerHTML = "Door is Going Up";
+      document.getElementById('close-btn').innerHTML = "Stop";
+      document.getElementById('open').style.backgroundColor  = 'rgb(247, 231, 12)' ;
+    break;
+// up state
+    case "3":
+      console.log("Up");
+      //html/css updates
+      document.getElementById('card-title').innerHTML = "Door is Up";
+      document.getElementById('close-btn').innerHTML = "Close";
+      document.getElementById('open').style.backgroundColor  = 'rgb(247, 47, 47)' ;
+      // if up, you can have the timer called
+      // if (autoTimer == true) {
+      //        timer = setTimeout(autoClose, timeValue*1000);
+      // }
+
+    break;
+
+    // stopped down state
+    case "4":
+      console.log("Stopped Down");
+      //html/css updates
+      document.getElementById('card-title').innerHTML = "Door is Stopped Going Down";
+      document.getElementById('close-btn').innerHTML = "Resume";
+      document.getElementById('open').style.backgroundColor  = 'rgb(247, 231, 12)' ;
+    break;
+    // stopped up state
+    case "5":
+      console.log("Stopped Up");
+      //html/css updates
+      document.getElementById('card-title').innerHTML = "Door is Stopped Going Up";
+      document.getElementById('close-btn').innerHTML = "Resume";
+      document.getElementById('open').style.backgroundColor  = 'rgb(247, 231, 12)' ;
+    break;
+    //error state
+    case "6":
+      console.log("Error");
+      //html/css updates
+      document.getElementById('card-title').innerHTML = "ERROR";
+      document.getElementById('close-btn').innerHTML = "PRESS TO FIX";
+      document.getElementById('open').style.backgroundColor  = 'rgb(70,130,180)';
+      // clearTimeout(timer);
+    break;
+    // default:
+    //   console.log("loading");
+    //   document.getElementById('card-title').innerHTML = "Door is Loading";
+    //   document.getElementById('close-btn').display = "Loading";
+    //   document.getElementById('open').style.backgroundColor  = white ;
+
+    case "7":
+    console.log("choose state");
+    //html/css updates
+    document.getElementById('card-title').innerHTML = "Waiting for End Stop Hit";
+    document.getElementById('close-btn').innerHTML = "hit end stop";
+    document.getElementById('open').style.backgroundColor  = 'rgb(70,130,180)';
+    break;
+  }
+>>>>>>> parent of b0bfb48... ALL WORKING
 }
 
 var argument;
 // if error button is getting pressed
 document.getElementById("close-btn").addEventListener("click", function() {
+<<<<<<< HEAD
         if (currentStateDoor == 6) {
                 // set equal to error press to pass through the call function
                 argument = "errorPress";
@@ -246,19 +419,32 @@ document.getElementById("close-btn").addEventListener("click", function() {
 
         });
         console.log("2 " + token);
+=======
+if(currentStateDoor==6) {
+  // set equal to error press to pass through the call function
+  argument="errorPress";
+} else {
+  // leave as just press
+  argument = "press";
+}
+// callFunction WebButton (in C) when we have a press (if error, use Error press then)
+console.log("1 "+token);
+        var moveState = particle.callFunction({ deviceId: deviceId, name: 'webButton', argument:argument, auth: token });
+        console.log("2 "+token);
+>>>>>>> parent of b0bfb48... ALL WORKING
         moveState.then(
-                function(data) {
-                        console.log('Function called succesfully:', data);
-                },
-                function(err) {
-                        console.log('An error occurred:', err);
-                });
-});
+        function(data) {
+          console.log('Function called succesfully:', data);
+        }, function(err) {
+          console.log('An error occurred:', err);
+        });
+      });
 
 
 var secs = 2;
 // enable auto close
 document.getElementById("enable_auto").addEventListener("click", function() {
+<<<<<<< HEAD
         secs = document.getElementById("example-number-input").value;
         secs = secs.toString() + "000";
 
@@ -276,16 +462,22 @@ document.getElementById("enable_auto").addEventListener("click", function() {
                 document.getElementById("notLoaded").style.display = "block";
 
         });
+=======
+secs = document.getElementById("example-number-input").value;
+secs = secs.toString()+"000";
+
+        var autoTimer = particle.callFunction({ deviceId: deviceId, name: 'autoCloseWeb', argument:secs, auth: token });
+>>>>>>> parent of b0bfb48... ALL WORKING
         autoTimer.then(
-                function(data) {
-                        console.log('Function called succesfully:', data);
-                },
-                function(err) {
-                        console.log('An error occurred:', err);
-                });
-});
+        function(data) {
+          console.log('Function called succesfully:', data);
+        }, function(err) {
+          console.log('An error occurred:', err);
+        });
+      });
 
 document.getElementById("save_setting").addEventListener("click", function() {
+<<<<<<< HEAD
         secs = document.getElementById("example-number-input").value;
         secs = secs.toString() + "000";
 
@@ -328,15 +520,31 @@ document.getElementById("turn_off").addEventListener("click", function() {
 
                 document.getElementById("notLoaded").style.display = "block";
 
-        });
+=======
+secs = document.getElementById("example-number-input").value;
+secs = secs.toString()+"000";
+
+        var autoTimer = particle.callFunction({ deviceId: deviceId, name: 'autoCloseWeb', argument:secs, auth: token });
         autoTimer.then(
-                function(data) {
-                        console.log('Function called succesfully:', data);
-                },
-                function(err) {
-                        console.log('An error occurred:', err);
-                });
-});
+        function(data) {
+          console.log('Function called succesfully:', data);
+        }, function(err) {
+          console.log('An error occurred:', err);
+>>>>>>> parent of b0bfb48... ALL WORKING
+        });
+      });
+document.getElementById("turn_off").addEventListener("click", function() {
+secs = 0;
+secs = secs.toString()+"000";
+
+        var autoTimer = particle.callFunction({ deviceId: deviceId, name: 'autoCloseWeb', argument:secs, auth: token });
+        autoTimer.then(
+        function(data) {
+          console.log('Function called succesfully:', data);
+        }, function(err) {
+          console.log('An error occurred:', err);
+        });
+      });
 
 
 
@@ -346,26 +554,26 @@ var timeValue;
 
 // turns off the auto closer
 document.getElementById("turn_off").addEventListener("click", function() {
-        //  displayElement(enable_auto,settings_module);
+      //  displayElement(enable_auto,settings_module);
 
-        // html updates
-        document.getElementById("settings_module").style.display = "none";
-        document.getElementById("enable_auto").style.display = "block";
-        document.getElementById("autoState").innerHTML = "AutoClose is Off";
-        document.getElementById("offButton").style.display = "none";
+      // html updates
+      document.getElementById("settings_module").style.display ="none";
+      document.getElementById("enable_auto").style.display ="block";
+      document.getElementById("autoState").innerHTML ="AutoClose is Off";
+      document.getElementById("offButton").style.display ="none";
 
 
 });
 // saves / updates the autocloser
 document.getElementById("save_setting").addEventListener("click", function() {
-        //  displayElement(enable_auto,settings_module);
+      //  displayElement(enable_auto,settings_module);
 
-        //pulls the value
-        timeValue = document.getElementById("example-number-input").value;
-        // html updates
-        document.getElementById("autoState").innerHTML = "AutoClose is On";
-        document.getElementById("offButton").style.display = "block";
-        document.getElementById("save_setting").innerHTML = "Update";
+      //pulls the value
+      timeValue = document.getElementById("example-number-input").value ;
+      // html updates
+      document.getElementById("autoState").innerHTML ="AutoClose is On";
+      document.getElementById("offButton").style.display ="block";
+      document.getElementById("save_setting").innerHTML ="Update";
 
 
 });
@@ -385,24 +593,35 @@ document.getElementById("save_setting").addEventListener("click", function() {
 // }
 
 
+<<<<<<< HEAD
 //  console.log("open: ", data);});
+=======
+
+
+
+
+
+
+
+  //  console.log("open: ", data);});
+>>>>>>> parent of b0bfb48... ALL WORKING
 
 
 //array of user account objects
 var users = [
 
-        user1 = {
+         user1 = {
                 door: {
-                        state: 3, // 0 for down, 1 for coming down, 2 for going up, 3 for up
+                        state:3,  // 0 for down, 1 for coming down, 2 for going up, 3 for up
                         temp: "72f",
                         hum: "34%",
                         motion: true, // boolean
 
                 },
-                email: "test@test.com",
-                password: "test",
-                phone: "5555555555",
-                id: 1234563,
+                email:"test@test.com",
+                password:"test",
+                phone:"5555555555",
+                id:1234563,
                 settings: {
                         name: "Home",
                         temp: true,
@@ -418,18 +637,18 @@ var users = [
 
                 }
         },
-        user2 = {
+         user2 = {
                 door: {
-                        state: 0, // 0 for down, 1 for coming down, 2 for going up, 3 for up
+                        state:0,  // 0 for down, 1 for coming down, 2 for going up, 3 for up
                         temp: "72f",
                         hum: "34%",
                         motion: true, // boolean
 
                 },
-                email: "dotard@down.us",
-                password: "maga",
-                phone: "5555555566",
-                id: 9876123,
+                email:"dotard@down.us",
+                password:"maga",
+                phone:"5555555566",
+                id:9876123,
                 settings: {
                         name: "Home",
                         temp: true,
@@ -468,16 +687,16 @@ function mainSetter() {
 
 
 function settingsSetter() { //initilies the settings states
-        document.getElementById('garage-name').value = user1.settings.name;
-        document.getElementById('garage-id').value = user1.id;
-        document.getElementById('temp-check').checked = user1.settings.temp;
-        document.getElementById('hum-check').checked = user1.settings.hum;
-        document.getElementById('motion-check').checked = user1.settings.motion
-        document.getElementById('example-number-input').value = user1.settings.autoClose;
-        document.getElementById('yard-input').value = user1.settings.autoOpen;
-        document.getElementById('door-opens-check').checked = user1.settings.mobile.open;
-        document.getElementById('door-closes-check').checked = user1.settings.mobile.close;
-        document.getElementById('door-open-check').checked = user1.settings.mobile.openFor;
+        document.getElementById('garage-name').value =user1.settings.name;
+        document.getElementById('garage-id').value =user1.id;
+        document.getElementById('temp-check').checked =user1.settings.temp;
+        document.getElementById('hum-check').checked =user1.settings.hum;
+        document.getElementById('motion-check').checked =user1.settings.motion
+        document.getElementById('example-number-input').value =user1.settings.autoClose;
+        document.getElementById('yard-input').value =user1.settings.autoOpen;
+        document.getElementById('door-opens-check').checked =user1.settings.mobile.open;
+        document.getElementById('door-closes-check').checked =user1.settings.mobile.close;
+        document.getElementById('door-open-check').checked =user1.settings.mobile.openFor;
 }
 
 function sensorDisplay() {
@@ -509,24 +728,27 @@ function sensorDisplay() {
 
 // Display Element swapping function
 function displayElement(hide, show) {
-        document.getElementById(hide).style.display = 'none';
-        document.getElementById(show).style.display = 'block';
-        currentView = show;
+  document.getElementById(hide).style.display = 'none';
+  document.getElementById(show).style.display = 'block';
+  currentView = show;
 }
+<<<<<<< HEAD
 // sets single display
 
+=======
+>>>>>>> parent of b0bfb48... ALL WORKING
 function singleDisplay(x) {
-        document.getElementById(x).style.display = 'block';
+  document.getElementById(x).style.display ='block';
 }
 
 // save button does
 document.getElementById("save-btn").addEventListener("click", function() {
         sensorDisplay();
-        displayElement("edit-page", "main-page");
+    displayElement("edit-page","main-page");
 });
 
 document.getElementById("close-btn").addEventListener("click", function() {
-        // stateChange();
+    // stateChange();
 });
 
 
@@ -551,7 +773,6 @@ function passWrite() {
 
 
 }
-
 function passScrape() {
 
 }

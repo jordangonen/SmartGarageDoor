@@ -4,48 +4,44 @@
 }
 
 /*https://www.w3schools.com/css/css_navbar.asp was a guide for nav bar style*/
-
 /*Nav Bar*/
-
 .nav-bar {
         list-style-type: none;
         margin: 0;
         padding: 0;
         overflow: hidden;
         background-color: #143642;
-}
 
+}
 #settings_panel {
-        margin: 30px;
+  margin: 30px;
 }
-
 #save-button {
-        margin-top: 10px;
+  margin-top: 10px;
 }
-
 #offButton {
-        display: none;
-        margin-top: 10px;
+  display:none;
+  margin-top: 10px;
 }
 
 #settings_module {
-        display: none;
+  display: none;
 }
-
 #give_padding {
-        margin-top: 5%;
+  margin-top: 5%;
 }
-
 #example-number-input {
-        width: 20%;
+  width: 20%;
 }
 
 .center {
-        text-align: center;
+  text-align: center;
+
 }
 
 .nav-bar li {
         float: left;
+
 }
 
 .nav-bar li a {
@@ -56,11 +52,15 @@
         text-decoration: none;
 }
 
+
 .menu-btn:hover {
         color: grey;
 }
 
-#autoState {}
+
+#autoState {
+
+}
 
 /*Card*/
 
@@ -89,7 +89,7 @@
         width: 80%;
 }
 
-.fa-i {
+.fa-i{
         font-size: 3em;
 }
 
@@ -115,11 +115,11 @@
         font-size: 2em;
 }
 
+
 .new-card-link {
         color: black;
         text-decoration: none;
 }
-
 .new-card-link:hover {
         color: grey;
 }
@@ -134,19 +134,17 @@
 }
 
 .num-input {
-        width: 30px;
-        ;
+        width: 30px;;
 }
-
 .yard-input {
-        width: 40px;
-        ;
+        width: 40px;;
 }
 
 .pad {
-        padding-top: 10px;
-        padding-bottom: 10px;
+  padding-top: 10px;
+  padding-bottom:10px;
 }
+
 
 .no-dec-a {
         text-decoration: none;
@@ -154,13 +152,14 @@
         padding: .7em;
         margin: 1em;
         background-color: rgb(162, 159, 161);
-}
 
+}
 .no-dec-a: hover {
         text-decoration: none;
         color: black;
         padding: 1em;
         margin: 1em;
+
 }
 
 #login-btn {
@@ -168,48 +167,41 @@
 }
 
 #login-page {
-        /*display: none;*/
+/*display: none;*/
 }
+#create-page{
+  display:none;
 
-#create-page {
-        display: none;
 }
 
 #main-page {
-        display: none;
+  display: none;
 }
 
-#request-page {
-        display: none;
-}
+#request-page{
+  display:none;
 
-#reset-page {
-        display: none;
 }
+#reset-page{
+  display:none;
 
+
+}
 #card {
-        display: none;
+  display: none;
 }
 
-#edit-page {
-        display: none;
-}
+#edit-page{
+  display:none;
 
+}
 #logout {
-        float: right;
+  float: right;
+
 }
 
 .center {
         text-align: center;
         margin: auto;
         width: 80%;
-}
-
-#log-out {
-        display: none;
-}
-
-#logo {
-        width: 80%;
-        height: 80%;
 }
